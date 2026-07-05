@@ -1,0 +1,574 @@
+/* ============================================================
+   Student Support — University AI Assistant
+   IS 365 | University of Dar es Salaam
+   Design system: Perplexity AI (visual inspiration only)
+   ============================================================ */
+
+/* Inter at 400 + 500 only — matches pplxSans weight range */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
+
+/* ── 1. DESIGN TOKENS ─────────────────────────────────────────────────────────
+   Sourced directly from the attached DESIGN.md.
+   Do not add colors outside this set.
+   ──────────────────────────────────────────────────────────────────────────── */
+:root {
+  /* Color system */
+  --color-aged-paper:    #faf8f5;   /* page canvas */
+  --color-surface:       #ffffff;   /* cards, inputs */
+  --color-subtle-fill:   #e8e6e1;   /* hover backgrounds */
+  --color-skeleton:      #f0eeea;   /* skeleton loading bars */
+  --color-charcoal:      #27251e;   /* primary text + user bubble */
+  --color-ash-gray:      #72706b;   /* secondary text */
+  --color-stone:         #92918b;   /* placeholder, timestamps */
+  --color-pebble:        #d1d1cd;   /* all borders */
+  --color-deep-teal:     #016a71;   /* ONLY for assistant label */
+
+  /* Typography — 3 sizes, 2 weights. Do not introduce others. */
+  --font:             'Inter', ui-sans-serif, system-ui, sans-serif;
+  --text-caption:     12px;
+  --text-body-sm:     14px;
+  --text-body:        16px;
+  --leading:          1.43;
+
+  /* Spacing — 8px base unit */
+  --sp-4:    4px;
+  --sp-8:    8px;
+  --sp-10:  10px;
+  --sp-12:  12px;
+  --sp-16:  16px;
+  --sp-32:  32px;
+
+  /* Border radii */
+  --radius-pill:   9999px;   /* all interactive controls */
+  --radius-card:     16px;   /* cards */
+  --radius-input:    12px;   /* text inputs */
+
+  /* Single shadow — the only elevation in the system */
+  --shadow: rgba(0, 0, 0, 0.08) 0px 1px 2px 0px;
+}
+
+
+/* ── 2. GLOBAL RESET ──────────────────────────────────────────────────────────*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  font-family: var(--font);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+textarea {
+  font-family: var(--font);
+}
+
+
+/* ── 3. PAGE SCAFFOLD ─────────────────────────────────────────────────────────
+   The #faf8f5 canvas is a signature design choice — do not replace with white.
+   ──────────────────────────────────────────────────────────────────────────── */
+html {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font);
+  font-size: var(--text-body-sm);
+  font-weight: 400;
+  line-height: var(--leading);
+  background: var(--color-aged-paper);
+  color: var(--color-charcoal);
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100%;
+}
+
+
+/* ── 4. APP SHELL ─────────────────────────────────────────────────────────────
+   640px max-width — the centered column from the design system.
+   On desktop the canvas shows on either side, creating the paper-on-desk feel.
+   ──────────────────────────────────────────────────────────────────────────── */
+.app-shell {
+  max-width: 640px;
+  margin: 0 auto;
+  height: 100vh;         /* fallback */
+  height: 100dvh;        /* dynamic — safe on iOS Safari */
+  display: flex;
+  flex-direction: column;
+  background: var(--color-aged-paper);
+  overflow: hidden;
+}
+
+/* Column edge lines — visible when viewport > 640px */
+@media (min-width: 641px) {
+  .app-shell {
+    border-left:  1px solid var(--color-pebble);
+    border-right: 1px solid var(--color-pebble);
+  }
+}
+
+
+/* ── 5. HEADER ────────────────────────────────────────────────────────────────
+   56px — matches the design system's top nav bar height.
+   ──────────────────────────────────────────────────────────────────────────── */
+.app-header {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sp-16);
+  border-bottom: 1px solid var(--color-pebble);
+  background: var(--color-aged-paper);
+  flex-shrink: 0;
+  gap: var(--sp-16);
+}
+
+.app-header__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-8);
+  overflow: hidden;
+}
+
+.app-header__title {
+  font-size: var(--text-body);     /* 16px */
+  font-weight: 500;
+  color: var(--color-charcoal);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.app-header__sep {
+  width: 4px;
+  height: 4px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-pebble);
+}
+
+.app-header__model {
+  font-size: var(--text-caption);   /* 12px */
+  color: var(--color-stone);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* Pill badge — 9999px per design system button spec */
+.app-header__badge {
+  flex-shrink: 0;
+  font-size: var(--text-caption);
+  font-weight: 500;
+  color: var(--color-ash-gray);
+  padding: 3px var(--sp-10);
+  border: 1px solid var(--color-pebble);
+  border-radius: var(--radius-pill);
+  background: var(--color-aged-paper);
+  letter-spacing: 0.03em;
+}
+
+
+/* ── 6. CHAT AREA ─────────────────────────────────────────────────────────────*/
+.chat-area {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.chat-area::-webkit-scrollbar       { width: 4px; }
+.chat-area::-webkit-scrollbar-track { background: transparent; }
+.chat-area::-webkit-scrollbar-thumb {
+  background: var(--color-pebble);
+  border-radius: var(--radius-pill);
+}
+
+
+/* ── 7. WELCOME SCREEN ────────────────────────────────────────────────────────*/
+.welcome {
+  padding: var(--sp-32) var(--sp-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-32);
+}
+
+.welcome__title {
+  font-size: var(--text-body);        /* 16px */
+  font-weight: 500;
+  color: var(--color-charcoal);
+  letter-spacing: -0.01em;
+  margin-bottom: var(--sp-8);
+}
+
+.welcome__subtitle {
+  font-size: var(--text-body-sm);    /* 14px */
+  font-weight: 400;
+  color: var(--color-ash-gray);
+  line-height: 1.55;
+}
+
+
+/* ── 8. SUGGESTION ITEMS ──────────────────────────────────────────────────────
+   Full-width vertical list — readable for longer question text.
+   12px radius (input radius) since these are content containers, not pill tags.
+   ──────────────────────────────────────────────────────────────────────────── */
+.suggestions-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+
+.suggestion-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-12);
+  padding: var(--sp-12) var(--sp-16);
+  background: var(--color-surface);
+  border: 1px solid var(--color-pebble);
+  border-radius: var(--radius-input);  /* 12px */
+  box-shadow: var(--shadow);
+  text-align: left;
+  font-size: var(--text-body-sm);     /* 14px */
+  font-weight: 400;
+  color: var(--color-charcoal);
+  line-height: var(--leading);
+  transition: background 0.1s ease;
+}
+
+.suggestion-btn:hover {
+  background: var(--color-subtle-fill);
+}
+
+.suggestion-btn:focus-visible {
+  outline: 1px solid var(--color-ash-gray);
+  outline-offset: 1px;
+}
+
+.suggestion-btn__arrow {
+  font-size: var(--text-body-sm);
+  color: var(--color-stone);
+  flex-shrink: 0;
+  transition: transform 0.1s ease, color 0.1s ease;
+}
+
+.suggestion-btn:hover .suggestion-btn__arrow {
+  color: var(--color-charcoal);
+  transform: translateX(2px);
+}
+
+
+/* ── 9. MESSAGES LIST ─────────────────────────────────────────────────────────*/
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-16);
+  padding: var(--sp-16);
+}
+
+
+/* ── 10. MESSAGE ROW ──────────────────────────────────────────────────────────*/
+.msg-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  animation: msg-in 0.15s ease both;
+}
+
+.msg-row--user      { align-items: flex-end;   }
+.msg-row--assistant { align-items: flex-start; }
+
+@keyframes msg-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+/*
+ * SIGNATURE ELEMENT — the teal accent appears EXACTLY ONCE per assistant turn.
+ * Deep teal (#016a71) is used only here, as a functional state indicator.
+ * Do not use it anywhere else in the UI.
+ */
+.msg-label {
+  font-size: var(--text-caption);   /* 12px */
+  font-weight: 500;
+  color: var(--color-deep-teal);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+
+/* ── 11. MESSAGE BUBBLES ──────────────────────────────────────────────────────*/
+.msg-bubble {
+  max-width: 80%;
+  padding: 10px var(--sp-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+/* User: charcoal fill + white text. Flat bottom-right corner. */
+.msg-bubble--user {
+  background: var(--color-charcoal);
+  color: #ffffff;
+  border-radius: var(--radius-input) var(--radius-input) 3px var(--radius-input);
+}
+
+/* Assistant: white card + pebble border. Flat top-left corner (below the label). */
+.msg-bubble--assistant {
+  background: var(--color-surface);
+  color: var(--color-charcoal);
+  border: 1px solid var(--color-pebble);
+  border-radius: 3px var(--radius-input) var(--radius-input) var(--radius-input);
+  box-shadow: var(--shadow);
+}
+
+.msg-text {
+  font-size: var(--text-body-sm);   /* 14px */
+  font-weight: 400;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.msg-time {
+  font-size: var(--text-caption);   /* 12px */
+  opacity: 0.5;
+}
+
+.msg-bubble--user .msg-time      { color: #ffffff;              align-self: flex-end;  }
+.msg-bubble--assistant .msg-time { color: var(--color-stone);   align-self: flex-start; }
+
+
+/* ── 12. TYPING INDICATOR ─────────────────────────────────────────────────────
+   Perplexity-style skeleton bars — three rows, cascading widths, shimmer animation.
+   ──────────────────────────────────────────────────────────────────────────── */
+.typing-bubble {
+  padding: var(--sp-12) var(--sp-16);
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 140px;
+}
+
+.skeleton-bar {
+  display: block;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-skeleton);
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+.skeleton-bar:nth-child(1) { width: 75%; animation-delay: 0s;    }
+.skeleton-bar:nth-child(2) { width: 55%; animation-delay: 0.12s; }
+.skeleton-bar:nth-child(3) { width: 35%; animation-delay: 0.24s; }
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1;   }
+}
+
+
+/* ── 13. ERROR NOTICE ─────────────────────────────────────────────────────────
+   Quiet and informational — not alarming. Matches the calm design register.
+   ──────────────────────────────────────────────────────────────────────────── */
+.error-notice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  padding: var(--sp-8) var(--sp-16);
+  background: var(--color-aged-paper);
+  border-top: 1px solid var(--color-pebble);
+  flex-shrink: 0;
+  animation: slide-in 0.15s ease both;
+}
+
+@keyframes slide-in {
+  from { transform: translateY(-4px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.error-notice__text {
+  flex: 1;
+  font-size: var(--text-caption);   /* 12px */
+  color: var(--color-ash-gray);
+  line-height: 1.43;
+}
+
+/* Pill dismiss button — 9999px per design system */
+.error-notice__dismiss {
+  font-size: var(--text-caption);
+  font-weight: 500;
+  color: var(--color-charcoal);
+  padding: 3px var(--sp-8);
+  border: 1px solid var(--color-pebble);
+  border-radius: var(--radius-pill);
+  transition: background 0.1s ease;
+  flex-shrink: 0;
+}
+
+.error-notice__dismiss:hover {
+  background: var(--color-subtle-fill);
+}
+
+.error-notice__dismiss:focus-visible {
+  outline: 1px solid var(--color-ash-gray);
+  outline-offset: 1px;
+}
+
+
+/* ── 14. FOOTER / INPUT AREA ──────────────────────────────────────────────────*/
+.app-footer {
+  flex-shrink: 0;
+  padding: var(--sp-12) var(--sp-16) var(--sp-16);
+  background: var(--color-aged-paper);
+  border-top: 1px solid var(--color-pebble);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+
+
+/* ── 15. INPUT CARD ───────────────────────────────────────────────────────────
+   White card (#ffffff) on the canvas (#faf8f5) = the paper-on-paper layering.
+   12px radius per design system "input" spec.
+   ──────────────────────────────────────────────────────────────────────────── */
+.input-card {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--sp-8);
+  background: var(--color-surface);
+  border: 1px solid var(--color-pebble);
+  border-radius: var(--radius-input);
+  padding: var(--sp-10) var(--sp-8) var(--sp-10) var(--sp-16);
+  box-shadow: var(--shadow);
+  transition: border-color 0.15s ease;
+}
+
+.input-card:focus-within {
+  border-color: var(--color-ash-gray);
+}
+
+.input-card__field {
+  flex: 1;
+  resize: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: var(--text-body);     /* 16px per design system */
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-charcoal);
+  max-height: 160px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.input-card__field::-webkit-scrollbar { display: none; }
+
+.input-card__field::placeholder {
+  color: var(--color-stone);
+}
+
+.input-card__field:disabled {
+  cursor: not-allowed;
+}
+
+
+/* ── 16. SUBMIT BUTTON ────────────────────────────────────────────────────────
+   28×28 circle per design system "Primary Submit Button" spec.
+   Transitions: pebble (inactive) → charcoal (active/loading).
+   ──────────────────────────────────────────────────────────────────────────── */
+.submit-btn {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: var(--radius-pill);  /* 9999px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-pebble);    /* inactive: grey */
+  color: var(--color-aged-paper);
+  transition: background 0.15s ease;
+  cursor: not-allowed;
+}
+
+.submit-btn--active {
+  background: var(--color-charcoal);  /* active: charcoal */
+}
+
+.submit-btn--active:not(:disabled) {
+  cursor: pointer;
+}
+
+.submit-btn--active:not(:disabled):hover {
+  background: #1a1914;                /* darker charcoal on hover */
+}
+
+/* Loading state — stay charcoal, show spinner, prevent clicks */
+.submit-btn--loading {
+  background: var(--color-charcoal);
+  cursor: wait;
+  opacity: 1;
+}
+
+.submit-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* CSS spinner — white on charcoal */
+.submit-spinner {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(250, 248, 245, 0.35);
+  border-top-color: var(--color-aged-paper);
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+
+/* ── 17. FOOTER HINT ──────────────────────────────────────────────────────────*/
+.footer-hint {
+  font-size: var(--text-caption);   /* 12px */
+  color: var(--color-stone);
+  text-align: center;
+  line-height: 1.43;
+}
+
+.footer-hint kbd {
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 1px 5px;
+  background: var(--color-subtle-fill);
+  border: 1px solid var(--color-pebble);
+  border-radius: 4px;
+  color: var(--color-charcoal);
+}
+
+
+/* ── 18. REDUCED MOTION ───────────────────────────────────────────────────────
+   Production-grade accessibility. Assignment marker for Task 9.
+   ──────────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-bar  { animation: none; opacity: 0.6; }
+  .submit-spinner { animation: none; }
+  .msg-row       { animation: none; }
+  .error-notice  { animation: none; }
+}

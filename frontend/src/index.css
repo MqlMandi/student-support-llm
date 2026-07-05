@@ -1,0 +1,13 @@
+/* frontend/src/index.css
+   Minimal reset — App.css owns all component styles.
+   Replace the entire contents of your existing index.css. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
