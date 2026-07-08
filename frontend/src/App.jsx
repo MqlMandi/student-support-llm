@@ -1,16 +1,6 @@
 // frontend/src/App.jsx
-// Student Support — University AI Assistant
+// Student Support - University AI Assistant
 // IS 365 | University of Dar es Salaam
-//
-// Folder structure (create the components/ folder first):
-//   frontend/src/
-//   ├── App.jsx          ← this file
-//   ├── App.css
-//   ├── index.css
-//   └── components/
-//       ├── WelcomeScreen.jsx
-//       ├── ChatMessage.jsx
-//       └── TypingIndicator.jsx
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import axios from "axios";
@@ -35,12 +25,10 @@ export default function App() {
   const inputRef  = useRef(null);
   const hasMessages = messages.length > 0;
 
-  // ── Auto-scroll to the latest message ────────────────────────────────────────
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
-  // ── Auto-resize textarea as the user types ────────────────────────────────────
   useEffect(() => {
     const el = inputRef.current;
     if (!el) return;
@@ -48,7 +36,6 @@ export default function App() {
     el.style.height = Math.min(el.scrollHeight, 160) + "px";
   }, [input]);
 
-  // ── Send question to FastAPI backend ──────────────────────────────────────────
   const send = useCallback(async (text) => {
     const q = (text ?? input).trim();
     if (!q || loading) return;
@@ -66,8 +53,8 @@ export default function App() {
       ]);
     } catch (err) {
       let msg = "Something went wrong. Please try again.";
-      if (err.code === "ERR_NETWORK")        msg = "Cannot reach the server — make sure the backend is running.";
-      else if (err.response?.status === 503) msg = "The AI model is unavailable — make sure Ollama is running.";
+      if (err.code === "ERR_NETWORK")        msg = "Cannot reach the server \u2014 make sure the backend is running.";
+      else if (err.response?.status === 503) msg = "The AI model is unavailable \u2014 make sure Ollama is running.";
       else if (err.response?.status === 504) msg = "The model timed out. Try a shorter question.";
       else if (err.response?.status === 400) msg = err.response.data.detail ?? "Invalid request.";
       setError(msg);
@@ -78,7 +65,6 @@ export default function App() {
     }
   }, [input, loading]);
 
-  // ── Keyboard: Enter sends, Shift+Enter adds a new line ────────────────────────
   const onKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey && !loading) {
       e.preventDefault();
@@ -86,111 +72,168 @@ export default function App() {
     }
   };
 
-  // ── Pre-fill input from a welcome suggestion ──────────────────────────────────
   const pickSuggestion = (suggestion) => {
     setInput(suggestion);
     inputRef.current?.focus();
   };
 
-  // Derive button visual state
   const canSend   = input.trim().length > 0;
   const btnState  = loading ? "loading" : canSend ? "active" : "idle";
 
+  const composer = (
+    <>
+      <div className="input-card">
+        <textarea
+          ref={inputRef}
+          className="input-card__field"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={onKeyDown}
+          placeholder="Ask about courses, exams, fees, hostel..."
+          rows={1}
+          disabled={loading}
+          aria-label="Your question"
+          aria-describedby="footer-hint"
+        />
+
+        <button
+          className={`submit-btn submit-btn--${btnState}`}
+          onClick={() => send()}
+          disabled={!canSend || loading}
+          aria-label={loading ? "Sending" : "Send question"}
+        >
+          {loading ? (
+            <span className="submit-spinner" aria-hidden="true" />
+          ) : (
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              className="submit-icon"
+              aria-hidden="true"
+            >
+              <path
+                d="M8 13V3M3.5 7.5L8 3 12.5 7.5"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          )}
+        </button>
+      </div>
+
+      <p className="footer-hint" id="footer-hint">
+        <kbd>Enter</kbd> to send &middot; <kbd>Shift+Enter</kbd> for new line
+      </p>
+    </>
+  );
+
   return (
     <div className="app-shell">
+      <aside className="app-sidebar" aria-label="Navigation">
+        <div className="app-sidebar__top">
+          <div className="app-sidebar__brand" aria-label="Student Support">
+            <span className="brand-mark" aria-hidden="true">S</span>
+            <span className="sidebar-collapse" aria-hidden="true">[]</span>
+          </div>
 
-      {/* ══ HEADER ════════════════════════════════════════════════════════════ */}
-      <header className="app-header">
-        <div className="app-header__brand">
-          <span className="app-header__title">Student Support</span>
-          <span className="app-header__sep" aria-hidden="true" />
-          <span className="app-header__model">Llama 3.2 · local</span>
+          <nav className="sidebar-nav" aria-label="Primary">
+            <button
+              className="sidebar-nav__item sidebar-nav__item--active"
+              type="button"
+              onClick={() => window.location.reload()}
+            >
+              <span aria-hidden="true">🔄</span>
+              <span>New Chat</span>
+            </button>
+
+            <button
+              className="sidebar-nav__item"
+              type="button"
+              onClick={() => window.location.href = "https://udsm.ac.tz/"}
+            >
+              <span aria-hidden="true">🌐</span>
+              <span>UDSM Website</span>
+            </button>
+            
+            <button 
+              className="sidebar-nav__item" 
+              type="button"
+              onClick={() => window.location.href = "https://aris3.udsm.ac.tz/index.php?r=student%2Fuser%2Flogin"}
+            >
+              <span aria-hidden="true">🧑‍🎓</span>
+              <span>ARIS 3</span>
+            </button>
+
+            <button 
+              className="sidebar-nav__item" 
+              type="button"
+              onClick={() => window.location.href = "https://www.instagram.com/udsmofficial?igsh=dGEzdWVwOHJ4bW1q"}
+            >
+              <span aria-hidden="true">📸</span>
+              <span>UDSM Socials</span>
+            </button>
+            
+          </nav>
+
+          <span className="sidebar-empty">No recent threads</span>
         </div>
-        <span className="app-header__badge">UDSM</span>
-      </header>
 
-      {/* ══ CHAT AREA ═════════════════════════════════════════════════════════ */}
-      <main className="chat-area">
-        {!hasMessages ? (
-          // Welcome screen — shown before any messages
-          <WelcomeScreen onSuggestionClick={pickSuggestion} />
-        ) : (
-          // Chat messages
-          <div className="messages" role="log" aria-live="polite" aria-label="Conversation">
-            {messages.map((msg, i) => (
-              <ChatMessage key={i} msg={msg} />
-            ))}
-            {loading && <TypingIndicator />}
-            {/* Invisible anchor scrolled into view on each new message */}
-            <div ref={bottomRef} />
+        <button className="sidebar-signin" type="button">
+          <span className="signin-dot" aria-hidden="true" />
+          <span>Sign In</span>
+          <span aria-hidden="true">&gt;</span>
+        </button>
+      </aside>
+
+      <div className="app-main">
+        <header className="app-header">
+          <div className="app-header__brand">
+            <span className="app-header__title">Student Support</span>
+            <span className="app-header__sep" aria-hidden="true" />
+            <span className="app-header__model">Llama 3.2 &middot; local</span>
+          </div>
+          <span className="app-header__badge">UDSM</span>
+        </header>
+
+        <nav className="top-topics" aria-label="Topics">
+          <button type="button">Discover</button>
+          <button type="button">Finance</button>
+          <button type="button">Health</button>
+          <button type="button">Academic</button>
+          <button type="button">Patents</button>
+        </nav>
+
+        <main className="chat-area">
+          {!hasMessages ? (
+            <WelcomeScreen onSuggestionClick={pickSuggestion} composer={composer} />
+          ) : (
+            <div className="messages" role="log" aria-live="polite" aria-label="Conversation">
+              {messages.map((msg, i) => (
+                <ChatMessage key={i} msg={msg} />
+              ))}
+              {loading && <TypingIndicator />}
+              <div ref={bottomRef} />
+            </div>
+          )}
+        </main>
+
+        {error && (
+          <div className="error-notice" role="alert">
+            <p className="error-notice__text">{error}</p>
+            <button
+              className="error-notice__dismiss"
+              onClick={() => setError(null)}
+              aria-label="Dismiss error"
+            >
+              Dismiss
+            </button>
           </div>
         )}
-      </main>
 
-      {/* ══ ERROR NOTICE ══════════════════════════════════════════════════════ */}
-      {error && (
-        <div className="error-notice" role="alert">
-          <p className="error-notice__text">{error}</p>
-          <button
-            className="error-notice__dismiss"
-            onClick={() => setError(null)}
-            aria-label="Dismiss error"
-          >
-            Dismiss
-          </button>
-        </div>
-      )}
-
-      {/* ══ FOOTER / INPUT ════════════════════════════════════════════════════ */}
-      <footer className="app-footer">
-        <div className="input-card">
-          <textarea
-            ref={inputRef}
-            className="input-card__field"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={onKeyDown}
-            placeholder="Ask about courses, exams, fees, hostel..."
-            rows={1}
-            disabled={loading}
-            aria-label="Your question"
-            aria-describedby="footer-hint"
-          />
-
-          {/* 28×28 circle submit button — per design system spec */}
-          <button
-            className={`submit-btn submit-btn--${btnState}`}
-            onClick={() => send()}
-            disabled={!canSend || loading}
-            aria-label={loading ? "Sending" : "Send question"}
-          >
-            {loading ? (
-              <span className="submit-spinner" aria-hidden="true" />
-            ) : (
-              /* Upward arrow icon — same as Perplexity's submit button */
-              <svg
-                viewBox="0 0 16 16"
-                fill="none"
-                className="submit-icon"
-                aria-hidden="true"
-              >
-                <path
-                  d="M8 13V3M3.5 7.5L8 3 12.5 7.5"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            )}
-          </button>
-        </div>
-
-        <p className="footer-hint" id="footer-hint">
-          <kbd>Enter</kbd> to send · <kbd>Shift+Enter</kbd> for new line
-        </p>
-      </footer>
-
+        {hasMessages && <footer className="app-footer">{composer}</footer>}
+      </div>
     </div>
   );
 }

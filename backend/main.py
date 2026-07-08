@@ -1,41 +1,53 @@
 # backend/main.py
+#
+# FastAPI backend — FAQ-based RAG.
+#
+# Changes from Phase 3 original:
+#   1. Imports ask_llm_with_rag instead of ask_llm.
+#   2. AskResponse includes a `sources` field (which FAQ sections were used).
+#   3. /ask endpoint runs retrieval before calling the LLM.
+#   4. /health now reports whether the FAQ file is loaded.
+#
+# No startup index-building is needed — the FAQ is parsed on every request
+# (it's a small text file, so this takes < 1 ms).
 
 import logging
 import sys
 import os
 from datetime import datetime
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-# Make sure Python can find our other files in the same folder
 sys.path.insert(0, os.path.dirname(__file__))
 
-from llm_client import ask_llm
+from llm_client import ask_llm_with_rag, find_relevant_faq
 from config import APP_NAME, APP_VERSION, LOG_FILE
 
-# ── Logging Setup ─────────────────────────────────────────────────────────────
-# Create the logs directory if it doesn't exist
+# Path to the FAQ file — sits next to main.py in the backend/ folder
+FAQ_PATH = os.path.join(os.path.dirname(__file__), "faq.txt")
+
+# ── Logging ────────────────────────────────────────────────────────────────────
 os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
 
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(message)s",
     handlers=[
-        logging.FileHandler(LOG_FILE),   # Write to log file
-        logging.StreamHandler()          # Also print to terminal
-    ]
+        logging.FileHandler(LOG_FILE),
+        logging.StreamHandler(),
+    ],
 )
 logger = logging.getLogger(__name__)
 
-# ── FastAPI App ───────────────────────────────────────────────────────────────
+# ── FastAPI App ────────────────────────────────────────────────────────────────
 app = FastAPI(
     title=APP_NAME,
-    description="A self-hosted LLM-powered student support chatbot.",
-    version=APP_VERSION
+    description="Self-hosted LLM student support assistant with FAQ-based RAG.",
+    version=APP_VERSION,
 )
 
-# CORS — This allows your React frontend (on port 5173) to call this backend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173"],
@@ -44,79 +56,100 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ── Data Models ───────────────────────────────────────────────────────────────
-# Pydantic models define the shape of request and response data
+
+# ── Data models ────────────────────────────────────────────────────────────────
 
 class AskRequest(BaseModel):
     question: str
 
 class AskResponse(BaseModel):
-    question: str
-    answer: str
+    question:  str
+    answer:    str
     timestamp: str
+    sources:   list[str] = []  # FAQ section names used to generate the answer
 
 class HealthResponse(BaseModel):
-    status: str
-    service: str
-    version: str
+    status:      str
+    service:     str
+    version:     str
+    faq_loaded:  bool
 
-# ── Endpoints ─────────────────────────────────────────────────────────────────
+
+# ── Endpoints ──────────────────────────────────────────────────────────────────
 
 @app.get("/health", response_model=HealthResponse)
 def health_check():
-    """Check if the backend is running correctly."""
-    logger.info("Health check requested")
+    """Check if the backend is running and whether the FAQ file is present."""
+    faq_present = os.path.exists(FAQ_PATH)
+    logger.info(f"Health check — FAQ loaded: {faq_present}")
     return HealthResponse(
         status="ok",
         service=APP_NAME,
-        version=APP_VERSION
+        version=APP_VERSION,
+        faq_loaded=faq_present,
     )
 
 
 @app.post("/ask", response_model=AskResponse)
 def ask_question(request: AskRequest):
     """
-    Receive a student question, send it to the local LLM, and return the answer.
+    Receive a student question, retrieve relevant FAQ sections,
+    inject them into the LLM prompt, and return the answer.
     """
     question = request.question.strip()
 
-    # Validate: reject empty questions
+    # Input validation
     if not question:
         logger.warning("Empty question received")
         raise HTTPException(status_code=400, detail="Question cannot be empty.")
-
     if len(question) > 1000:
         logger.warning("Question too long")
         raise HTTPException(status_code=400, detail="Question is too long (max 1000 characters).")
 
-    logger.info(f"Question received: {question}")
+    logger.info(f"Question: {question}")
 
     try:
-        answer = ask_llm(question)
+        # Step 1 — retrieve the relevant FAQ sections for logging/response
+        # (ask_llm_with_rag also calls this internally, but we call it here
+        #  separately so we can log which sections were used)
+        from llm_client import find_relevant_faq, _load_faq
+        sections_used: list[str] = []
+        faq_sections = _load_faq(FAQ_PATH)
+
+        if faq_sections:
+            from llm_client import _score
+            scored = sorted(
+                [(name, _score(text, question)) for name, text in faq_sections.items()],
+                key=lambda x: x[1],
+                reverse=True,
+            )
+            sections_used = [name for name, score in scored[:2] if score >= 0.15]
+            if sections_used:
+                logger.info(f"FAQ sections retrieved: {sections_used}")
+            else:
+                logger.info("No FAQ sections met the relevance threshold — using model knowledge")
+
+        # Step 2 — generate the answer
+        answer = ask_llm_with_rag(question, faq_path=FAQ_PATH)
         timestamp = datetime.now().isoformat()
 
-        logger.info(f"Answer generated successfully ({len(answer)} characters)")
-        logger.info(f"Answer preview: {answer[:120]}...")
+        logger.info(f"Answer generated ({len(answer)} chars)")
 
-        return AskResponse(question=question, answer=answer, timestamp=timestamp)
+        return AskResponse(
+            question=question,
+            answer=answer,
+            timestamp=timestamp,
+            sources=sections_used,
+        )
 
     except ConnectionError as e:
         logger.error(f"Ollama connection error: {e}")
-        raise HTTPException(
-            status_code=503,
-            detail="The AI model is not running. Please start Ollama."
-        )
+        raise HTTPException(status_code=503, detail="The AI model is not running. Start Ollama.")
 
     except TimeoutError as e:
-        logger.error(f"Timeout error: {e}")
-        raise HTTPException(
-            status_code=504,
-            detail="The model took too long to respond. Please try again."
-        )
+        logger.error(f"Timeout: {e}")
+        raise HTTPException(status_code=504, detail="The model timed out. Please try again.")
 
     except Exception as e:
         logger.error(f"Unexpected error: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail="An internal error occurred. Please try again."
-        )
+        raise HTTPException(status_code=500, detail="An internal error occurred.")

@@ -1,0 +1,583 @@
+# UDSM Student Support Assistant — FAQ
+# Source documents: Undergraduate Prospectus 2025/2026, Almanac 2025/2026,
+#                   Students Affairs Policy (Revised March 2025)
+#
+# Format: each section begins with === SECTION NAME === on its own line.
+# The retrieval function in llm_client.py uses these headers to split
+# the file into searchable sections.
+
+=== COURSE REGISTRATION ===
+All students register through the UDSM Academic Registration Information System (ARIS).
+Payments for fees must be made using control numbers obtained through ARIS, payable at the nearest bank or via mobile money.
+
+Registration deadlines:
+- New undergraduate and postgraduate students: registration opens 17 November 2025 and closes 28 November 2025.
+- Continuing students (Semester 1): registration opens 24 November 2025 and closes 5 December 2025.
+- Continuing students (Semester 2): registration opens 6 April 2026 and closes 17 April 2026.
+
+Course load: Full-time students must register for a minimum of 60 course credits and a maximum of 72 course credits per semester. Part-time students must register for a minimum of 48 and maximum of 96 credits per academic year.
+
+Important rules:
+- No student may start a course more than 3 weeks after the beginning of the semester.
+- No student may withdraw from a course more than 4 weeks after the beginning of the semester (applications to the Head/Dean/Director required before this deadline).
+- Subject/programme transfers are allowed only within the first 4 weeks of the first semester and only if the student meets the admission requirements for the new programme.
+- Successful applicants are registered only after paying the required university fees.
+- Fees paid are not refunded.
+
+Contact: Directorate of Undergraduate Studies (DUS), dus@udsm.ac.tz, Tel: +255 222 410 544 / 410 545 / 410 513.
+
+=== EXAMINATION RULES AND ACADEMIC CONDUCT ===
+Eligibility: A student must complete 100% of all coursework assessment and learning activities (assignments, tests, quizzes, presentations, laboratory work, fieldwork) and must secure a minimum cumulative score of 40% of continuous assessment marks to be eligible to sit for the university examination. Students who do not meet these requirements will be barred from examinations.
+
+Examination format: Coursework assessment normally constitutes 40% and the final university examination constitutes 60% of the total course assessment.
+
+Absence from exams: A student who deliberately absents themselves without compelling reasons is deemed to have absconded and will be discontinued from the University.
+
+Prohibited items in the examination room (unauthorized materials): mobile phones, smart watches, electronic devices, written or printed notes, soft drinks (except water where permitted), alcoholic drinks, or any other specified material.
+
+Academic dishonesty includes:
+- Plagiarism
+- Possession of unauthorized materials during an examination
+- Cheating or attempting to cheat (copying, giving assistance)
+- Communicating with others inside or outside the examination room
+- Impersonation (sitting for exam on behalf of another person)
+- Destroying or falsifying evidence of misconduct
+- Causing disturbance in or near the examination room
+- Tampering with, altering, or fabricating examination records (including digital systems)
+- Forging or using fraudulent academic documents
+
+Penalties:
+- Possession of unauthorized materials, plagiarism, or communicating during exams: discontinuation from the University.
+- Cheating, copying, or impersonation: failure in the whole year's examination and discontinuation.
+- Causing disturbance: failure and discontinuation.
+- Tampering with records (digital): discontinuation, revocation of degree, permanent ban, and legal prosecution.
+- Where irregularities are discovered after graduation, the University may revoke the award.
+
+Reporting: All cases of academic dishonesty must be reported to the Senate Undergraduate Studies Committee through the Department/Institute/School/College using Form UDSM-EI-01.
+
+Appeals: A candidate found guilty and aggrieved may appeal to the Senate in accordance with regulations 18 and 19 of the General University Examination Regulations (GUER).
+
+=== GRADING SYSTEM AND GPA ===
+UDSM uses the following grading scale:
+A   = 70 – 100%
+B+  = 60 – 69%
+B   = 50 – 59%
+C   = 40 – 49%  (minimum passing grade)
+D   = 35 – 39%
+E   = 0  – 34%
+
+The minimum passing grade is C (40%). Any grade below C is a fail.
+
+Coursework Assessment (CA) constitutes 40% of the total mark. The final university examination constitutes 60%. Some practical/research-based courses may have CA up to 100% with Senate approval.
+
+Progress to next year: Full-time students must pass a minimum of 120 course credits and achieve a minimum overall GPA of 2.0 to proceed to the following year of study.
+
+Supplementary eligibility: A student may be allowed to re-sit failed courses if they attained an overall GPA of 1.8 or above after the first sitting.
+
+Carrying over courses: A student who achieves a GPA of 2.0 or above after supplementary examinations may carry over failed courses into the next year. The maximum grade for a carried-over or supplementary exam course is C.
+
+=== SUPPLEMENTARY EXAMINATIONS ===
+Students who fail courses in the first sitting may be eligible for supplementary (re-sit) examinations if their overall GPA after the first sitting is 1.8 or above.
+
+The maximum grade obtainable in a supplementary examination is C (the minimum passing grade). This also applies to carried-over courses.
+
+Supplementary examinations are held at least one month after the ordinary second-semester examinations.
+
+2025/2026 Supplementary Examination Dates (Main Campus, except MCHAS):
+- Sitting: Monday 28 September 2026 – Friday 2 October 2026
+- Marking: Monday 5 October 2026 – Friday 9 October 2026
+- Compilation: Monday 12 October 2026 – Friday 16 October 2026
+- Results release: Friday 23 October 2026
+- Senate approval (Supp/Special): Friday 6 November 2026
+
+MCHAS Supplementary Examination Dates:
+- Sitting: Thursday 22 October 2026 – Wednesday 28 October 2026
+- Results: Tuesday 3 November 2026
+- Senate (MCHAS): Tuesday 17 November 2026
+
+A student who has a PEX (Postponed Exam) or I (Incomplete) grade must clear the course during the special examinations for that academic year. Failure to do so without Board approval means the student is considered to have absconded studies.
+
+=== ACADEMIC CALENDAR 2025/2026 ===
+ORIENTATION AND REGISTRATION:
+- Fresh entrants report: Monday 17 November 2025
+- Orientation Week (new UG and PG students): 17 – 22 November 2025
+- Registration of new students: 17 – 28 November 2025
+- Postgraduate Orientation Day: Friday 28 November 2025
+- Continuing students report: Saturday 22 November 2025
+- Registration of continuing students (Semester 1): 24 November – 5 December 2025
+
+SEMESTER 1 (Main Campus except MCHAS):
+- Semester 1 begins: Monday 24 November 2025
+- Lecture sessions begin: Monday 24 November 2025
+- Mid-Semester Breather: 20 December 2025 – 27 December 2025
+- Coursework Assessment Week: 13 – 15 January 2026
+- Lecture sessions end: Thursday 5 March 2026
+- Semester 1 examinations: Friday 6 March 2026 – Friday 20 March 2026
+- Inter-Semester Break: 21 March 2026 – 4 April 2026
+- Provisional results release (Semester 1): Monday 20 April 2026
+
+SEMESTER 2 (Main Campus except MCHAS):
+- Semester 2 begins: Monday 6 April 2026
+- Lecture sessions begin: Wednesday 8 April 2026
+- Registration for Semester 2: 6 April 2026 – 17 April 2026
+- Coursework Assessment Week: 26 – 28 May 2026
+- Lecture sessions end: Thursday 16 July 2026
+- Semester 2 examinations: Friday 17 July 2026 – Friday 31 July 2026
+- End of 2025/2026 Academic Year: 31 July 2026
+- Provisional results release (Semester 2): Friday 11 September 2026
+- Long vacation: 1 August 2026 – 31 October 2026
+
+SUPPLEMENTARY EXAMINATIONS: 28 September 2026 – 2 October 2026 (results: 23 October 2026)
+
+MBEYA COLLEGE OF HEALTH AND ALLIED SCIENCES (MCHAS):
+- Semester 1: 24 November 2025 – 10 April 2026
+- Semester 1 Exams: 30 March 2026 – 10 April 2026
+- Semester 2: 20 April 2026 – 18 September 2026
+- Semester 2 Exams: 7 – 18 September 2026
+- End of 2025/2026 academic year (MCHAS): 18 September 2026
+
+=== GRADUATION CEREMONIES 2025/2026 ===
+55th UDSM Graduation Ceremonies (2024/2025 academic year):
+- Cluster I: Friday 13 June 2025
+- Cluster II: Tuesday 18 November 2025
+- Cluster III: Thursday 20 November 2025
+- Cluster IV: Monday 1 December 2025
+
+17th MUCE Graduation Ceremony: Wednesday 26 November 2025
+18th DUCE Graduation Ceremony: Saturday 29 November 2025
+
+56th UDSM Graduation Ceremonies (2025/2026 academic year):
+- Cluster I: Friday 29 May 2026
+- Cluster II: Thursday 15 October 2026
+- Cluster III: Friday 16 October 2026
+- Cluster IV: Friday 27 November 2026
+
+18th MUCE Graduation Ceremony: Friday 20 November 2026
+19th DUCE Graduation Ceremony: Wednesday 25 November 2026
+
+Graduation ceremonies are held at the Mwalimu Julius K. Nyerere Mlimani Campus (Main Campus). Students are notified by their colleges/schools about eligibility and robing requirements.
+
+=== PUBLIC HOLIDAYS 2025/2026 ===
+2025:
+- Maulid Day: Friday 5 September 2025
+- Nyerere Day: Tuesday 14 October 2025
+- Independence Day: Tuesday 9 December 2025
+- Christmas: Thursday 25 December 2025
+- Boxing Day: Friday 26 December 2025
+
+2026:
+- New Year: Thursday 1 January 2026
+- Zanzibar Revolution Day: Monday 12 January 2026
+- Eid el Fitr Day 1: Friday 20 March 2026 (subject to moon sighting)
+- Eid el Fitr Day 2: Saturday 21 March 2026 (subject to moon sighting)
+- Good Friday: Friday 3 April 2026
+- Easter Monday: Monday 6 April 2026
+- Karume Day: Tuesday 7 April 2026
+- Union Day: Sunday 26 April 2026
+- Workers' Day: Friday 1 May 2026
+- Eid el Hajj: Wednesday 27 May 2026 (subject to moon sighting)
+- Saba Saba Day: Tuesday 7 July 2026
+- Nane Nane Day: Saturday 8 August 2026
+- Maulid Day: Wednesday 26 August 2026
+- Nyerere Day: Wednesday 14 October 2026
+- Independence Day: Wednesday 9 December 2026
+- Christmas: Friday 25 December 2026
+- Boxing Day: Saturday 26 December 2026
+
+=== ADMISSION REQUIREMENTS ===
+Minimum Entrance Requirements (Direct Entry):
+A candidate must have:
+1. Certificate of Secondary Education (CSEE) with passes in FIVE approved subjects, THREE of which must be at Credit level, obtained before sitting for ACSEE.
+2. AND at ACSEE: Two Principal Passes in appropriate subjects with total points from three subjects not below 5 (Arts programmes) or 4 (Science-based programmes).
+
+Grade-to-point conversion: A=5, B=4, C=3, D=2, E=1, S=0.5, F=0. The minimum Principal Pass is grade E.
+(For 2014 and 2015 graduates, use: A=5, B+=4, B=3, C=2, D=1, E=0.5, F=0; minimum Principal Pass is grade D.)
+
+Note: Principal passes in Divinity or Islamic Knowledge are not counted.
+
+Equivalent Entry (Diploma holders): An appropriate Diploma with GPA not less than 3.5 for Ordinary Diplomas, or B+ average for Teacher Education and Health diplomas, or Distinction for unclassified awards, or B for Full Technician Certificates, from a college fully registered by NACTE and approved by UDSM Senate.
+
+Applicants from 8-4-4 education system countries (e.g., Kenya) must complete at least one year of university in their own country before applying to UDSM.
+
+How to apply: All applications must be submitted online through https://udsm.Admission.ac.tz. Submitting false information or forged certificates is an offence and may lead to legal action and de-registration.
+
+Contact: Director of Undergraduate Studies, dus@udsm.ac.tz, Tel: +255 222 410 544 / 410 545.
+
+=== TUITION FEES AND UNIVERSITY COSTS ===
+Tuition fees per year (Tanzanian students):
+- Arts, Education, Humanities programmes: TZS 1,000,000
+- Social Sciences, Natural Sciences, Agriculture, most programmes: TZS 1,300,000
+- Computer Science, Engineering, ICT programmes: TZS 1,500,000
+- Medicine (Doctor of Medicine, Doctor of Dental Surgery at MCHAS): TZS 1,800,000
+- Bachelor of Laws (LLB): TZS 1,500,000
+
+International students pay significantly higher fees (approximately 5 to 14 times the Tanzanian fee depending on the programme).
+
+Direct University Costs (paid to the University, all students):
+- Application fee: TZS 5,000 (Tanzanians) / TZS 12,500 (non-Tanzanians)
+- Registration (once): TZS 5,000 / TZS 250,000
+- Examination fee: TZS 12,000 / TZS 300,000
+- Medical Capitation (NHIF): TZS 50,400 / TZS 168,000
+- Student Union fee: TZS 5,000 / TZS 37,500
+- TCU Quality Assurance: TZS 20,000 / TZS 25,000
+- Total additional costs (Tanzanians): TZS 97,400
+
+Advisory student cost allowances (paid to student):
+- Books and stationery: TZS 200,000 per year
+- Meal and accommodation: TZS 2,099,000 per year
+
+All local fee payments must be made through control numbers obtained from ARIS, payable at a bank or via mobile money. All payments must be receipted.
+
+=== ACCOMMODATION AND HOSTEL ===
+The University Students Accommodation Bureau (USAB) manages all student accommodation. USAB offices are located near Hall V on the main campus.
+
+On-campus accommodation: 7 Halls of Residence + CoICT Hostels + Dr. John Joseph Pombe Magufuli Hostels (all located on the Mwalimu Julius K. Nyerere Mlimani Campus).
+Rate: TZS 800 per student per day × 119 days per semester.
+
+Off-campus University-managed accommodation:
+- Mabibo Hostels: located 4 kilometres from Mlimani Campus. Rate: TZS 500 per student per day × 119 days per semester.
+- Mazizini Hostels (Zanzibar, for IMS students): Rate: TZS 500 per student per day.
+- Kijitonyama and Ubungo Hostels: available for Mlimani and DUCE students.
+
+Accommodation Caution Money: TZS 10,000 paid once during the first year. Additional TZS 10,464.46 per month (or TZS 41,860 per semester) applies if the University provides extra facilities such as refrigerators or cookers.
+
+Transport: Shuttle buses between Mlimani Campus and Mabibo Hostels run 14 hours per day (6:00 – 22:00 during semester; 6:00 – 20:00 during vacation).
+
+The accommodation policy gives priority to students with special needs, first-year students, and students from far regions.
+
+Students who rent accommodation outside University facilities are supported through a database and online platform managed by DSTS.
+
+Contact: USAB offices near Hall V, main campus. Email: doso@udsm.ac.tz, Tel: +255 22 2410256.
+
+=== LIBRARY SERVICES AND HOURS ===
+The University Library consists of two buildings: Dr. Wibert Chagula Library and the University Library (New). It is a national depository housing books, journals, research reports, Government and University publications, East Africana Collection, and materials on SADC and the former East African Community.
+
+Library opening hours:
+During semester time:
+- Monday – Saturday (daytime): 8:00 – 18:30 (1-hour lunch break)
+- Sunday (daytime): 14:00 – 18:30
+- Public holidays (daytime): 8:00 – 18:30
+- Monday – Sunday and Public holidays (night): 19:30 – 22:30
+
+During vacation:
+- Monday – Friday: 8:00 – 17:00 (closed during lunch)
+- Saturday: 8:00 – 15:30 (closed during lunch)
+- Sunday and Public Holidays: Closed
+
+Electronic resources: 11 subscribed databases, 49 free access scholarly databases, 7 e-theses and dissertations databases. All accessible on-campus via University Internet; eligible members may access off-campus.
+
+Reading space: capacity of 2,500 students, staff, and external users at one time.
+
+For more information: https://www.udsm.ac.tz/web/index.php/institutes/library
+Email: directorlibrary@udsm.ac.tz, Tel: +255 22 2410500 Ext. 2165 / +255 22 2410241.
+
+=== HEALTHCARE SERVICES ===
+The UDSM Hospital provides preventive, curative and restorative health services to students, staff and the general public. It is located within the Mwalimu J. K. Nyerere Mlimani Campus.
+
+Dispensaries: located at Mabibo Hostels, Institute of Marine Sciences (Zanzibar), SJMC, and CoICT. First aid services are available at Dr. John Joseph Pombe Magufuli Hostel.
+
+Emergency contact numbers:
+- Medical Officer in Charge: 0739 260 861
+- Ambulance Services: 0737 830 053
+- Emergency Section, UDSM Hospital: 0737 828 559
+- UDSM Police Station: +255 22 2410379
+- UDSM Auxiliary Police: +255 22 2410266
+
+Students who fall sick during examinations must report to their department and to the Hospital for treatment and directives. If a student wishes to postpone examinations or studies on medical grounds, they must submit an authentic medical report from a recognized hospital.
+
+HIV/AIDS: UDSM Hospital provides free HIV counselling, testing and treatment with strict confidentiality. The university recommends abstinence, faithfulness, limiting sexual partners, and consistent use of condoms.
+
+Comprehensive Sexuality Education (CSE) Course (free, online):
+- Website: https://www.udsm.ac.tz
+- Username: your registration number
+- Password: Cvl@2023
+- Search: CSE 2021 (with space)
+- Enrolment key: CSE2021 (no space)
+
+=== NATIONAL HEALTH INSURANCE FUND (NHIF) ===
+It is mandatory for every undergraduate student at UDSM to have National Health Insurance Fund (NHIF) coverage. Students pay a specified amount through their ARIS3 account. Upon fulfilling this requirement, students receive an NHIF membership card allowing access to healthcare at the UDSM Hospital and all other accredited health facilities countrywide.
+
+The UDSM Hospital and its dispensaries are accredited to provide services to NHIF beneficiaries.
+
+NHIF activities at UDSM are coordinated by the Health and Catering Unit in collaboration with the NHIF Office.
+
+Medical Capitation (NHIF contribution) as part of Direct University Costs: TZS 50,400 per year (Tanzanians) or TZS 168,000 per year (international students).
+
+=== COUNSELLING AND MENTAL HEALTH SERVICES ===
+The Counselling Unit is under the Directorate of Social Services (DSS). It provides integrated guidance and counselling services to students and staff in the following areas:
+
+Psycho-social support: sexual harassment, social abuse, discrimination, bullying, anger and stress management, anxiety, depression, grief/loss, relationships, substance abuse, addiction, suicidal tendencies, marital issues, and conflict resolution.
+
+Academic support: academic underperformance, low productivity, absenteeism, career guidance and counselling, and professional misconduct.
+
+Health support: HIV/AIDS, diabetes, cancer, high/low blood pressure, and psychological disorders.
+
+Financial support: handling finances, debt management, and financial challenges.
+
+Contact:
+- Head of Counselling Unit, University of Dar es Salaam, P.O. Box 35091, Dar es Salaam.
+- Tel: +255 736 393 936
+
+The Counselling Unit also coordinates with Guidance and Counselling Liaison Committees in colleges, schools, institutes and departments. Mental health students may be assigned to special rooms with early identification mechanisms including screenings.
+
+=== ICT SUPPORT AND COMPUTING ===
+The University Computing Centre (UCC) manages ICT infrastructure and provides computing services to students and staff.
+
+Contact UCC:
+- Email: ucc@udsm.ac.tz
+- Tel: +255 22 2410500 Ext. 2000 / +255 22 2410645 / +255 744 782 120
+
+ARIS (Academic Registration Information System): The student portal used for course registration, fee payment, and academic records. Students obtain their control numbers through ARIS to pay fees at banks or via mobile money.
+
+Student portal access: Log in using your registration number at the UDSM website.
+
+Internet and computing facilities:
+- Computer laboratories are located across various colleges and schools on campus.
+- Hotspot areas have been established across the campus for Wi-Fi access.
+- Private service providers also offer internet services at affordable prices.
+
+ICT Steering Committee meets regularly to oversee ICT services at the university.
+
+For any technical issues (login problems, portal access, network issues), contact UCC or the ICT helpdesk at your college or school.
+
+=== STUDENT GOVERNANCE AND DARUSO ===
+DARUSO (Dar es Salaam University Students Organisation) is the official students' union responsible for organising and governing students' academic, political, social, outreach and recreational activities.
+
+DARUSO operates through three principal organs:
+1. DARUSO Cabinet
+2. Judicial Organ
+3. University Students Representatives Council (USRC)
+
+The Dean of Students is responsible for all student affairs and welfare at the University. The Dean serves as the Chief Counsellor to student leadership and the link between student leadership and the University Management. The Dean also acts as the Chief Returning Officer during DARUSO elections.
+
+Students participate in key University governance through DARUSO representation on the University Council and Senate.
+
+DARUSO elections: The electoral process is being digitised to increase voter participation. Mechanisms are in place to ensure participation of female students and students with special needs.
+
+Contact: Directorate of Students Services (DSTS), doso@udsm.ac.tz, Tel: +255 22 2410256.
+
+=== TRANSPORT SERVICES ===
+Transport is available to students at reasonable prices.
+
+Mabibo Hostel shuttle service: Shuttle buses run between Mlimani Campus and Mabibo Hostels daily:
+- During semester: 06:00 – 22:00 hours
+- During vacation: 06:00 – 20:00 hours
+
+Commuter buses (Daladala): Available along the route Mwenge – University – Ubungo or Changanyikeni. These are public buses and run throughout the day.
+
+Students with special needs: Five tricycles with drivers are available on the main campus to assist with mobility.
+
+Transport for off-campus students is coordinated by DARUSO and DSTS. The University monitors and regulates transport services to acceptable standards.
+
+Shopping and banks: Mlimani City Shopping Mall is located approximately 3 kilometres from campus along Sam Nujoma Road and offers shopping, banking (CRDB, NBC, NMB), Bureau de Change, and other services.
+
+=== CATERING AND FOOD SERVICES ===
+Catering services at UDSM are offered by contracted food service providers at subsidised, affordable prices in designated cafeterias.
+
+Main campus facilities:
+- Two main cafeterias with capacity to serve the current student population.
+- Additional food outlets available at CoET, Mama Lishe, Hill Park, Yombo, and UDASA Club.
+
+Quality monitoring: Catering services are monitored by the Directorate of Planning, Development and Investment (DPDI) and the Directorate of Students Services (DSTS) with support from the Directorate of Estates Services (DES) and the Department of Food Science and Technology (DFST).
+
+Guidelines: UDSM has developed guidelines for monitoring food safety, quality, quantity and service to ensure standards are maintained.
+
+Special dietary needs and international flavours are to be considered in catering services as part of the University's inclusivity policy.
+
+The University Bookshop is located near Cafeteria 1 and 2 at Mlimani Campus.
+
+=== SPORTS AND GAMES FACILITIES ===
+The University main campus offers a wide range of sporting facilities:
+- International-standard athletics track and field
+- Swimming pool
+- Tennis courts (lawn and table tennis)
+- Soccer (football) pitches
+- Netball and basketball courts
+- Hockey and cricket fields
+- Well-equipped gymnasium
+- Badminton and squash courts
+
+Students can participate in: athletics, swimming, lawn tennis, table tennis, soccer, basketball, netball, hockey, badminton, cricket, handball, and boxing.
+
+UDSM affiliations:
+- TUSA (Tanzania Universities Sports Association): inter-university competitions nationally
+- ECSAUSA (East, Central and Southern Africa Universities Sports Association)
+- FASU (Federation of African University Sports)
+- FISU (Federation of International University Sports)
+
+Inter-college competitions are organised annually at the main campus. UDSM also participates in UDSM-DUCE annual competitions.
+
+Sports and Games Policy: UDSM adopted a Sports and Games Policy in 2017. The policy promotes adapted playgrounds and specialised equipment for students with disabilities.
+
+=== SAFETY AND SECURITY ===
+UDSM has three layers of security:
+1. UDSM Police Station (Tanzania Police)
+2. UDSM Auxiliary Police Unit (under the Directorate of Social Services)
+3. Private Security Companies contracted for halls of residence and sensitive areas
+
+Security contact numbers:
+- UDSM Auxiliary Police Station: +255 22 2410266
+- UDSM Police Station: +255 22 2410379
+- Emergency (Ambulance): 0737 830 053
+- Emergency (Hospital): 0737 828 559
+
+Fire prevention safety equipment is available in all halls of residence.
+
+Students are cautioned to secure themselves and their belongings by maintaining constant security awareness. Report any crime or suspicious activity immediately to the nearest police contact.
+
+UDSM adopted the Security Policy and Operational Procedures in 2020, covering protection of student property, off-campus student safety, e-security awareness, and community policing.
+
+Security personnel are sensitised to handle security matters efficiently and effectively.
+
+=== FINANCIAL SUPPORT AND LOANS ===
+The main source of financial support for Tanzanian undergraduate students is the Higher Education Students Loans Board (HESLB). Students apply directly to HESLB for loan support to cover tuition and living expenses.
+
+Other financial support available at UDSM:
+- UDSM Needy Students Fund: for students experiencing financial difficulties.
+- Merit Scholarships: awarded to students who qualify academically.
+- Private sector scholarships: a few private organizations offer scholarships; availability varies.
+
+Financial literacy and entrepreneurship:
+- UDIEC (University Directorate of Innovation and Entrepreneurship Centre) organises entrepreneurial clinics for students.
+- Students can engage in part-time jobs such as teaching, technical support, security, and handiwork.
+- Postgraduate students may take part-time employment as provided in UDSM Regulations (2018).
+- Workshops and training are available to build students' financial literacy and capacity.
+
+Contact for financial matters: Directorate of Finance (Bursar) or Directorate of Students Services (DSTS), doso@udsm.ac.tz.
+
+All fee payments must be made through control numbers via ARIS system.
+
+=== ORIENTATION FOR NEW STUDENTS ===
+Orientation Week for new undergraduate and postgraduate students: 17 – 22 November 2025.
+
+New students must report on Monday 17 November 2025. Postgraduate students have a separate Orientation Day on Friday 28 November 2025.
+
+The orientation programme is organised by:
+- Directorate of Undergraduate Studies (DUS)
+- Directorate of Postgraduate Studies (DPGS)
+- Directorate of Students Services (DSTS)
+
+What happens during orientation:
+- Introduction to the University, its campuses, and the academic environment.
+- Overview of academic programmes and course registration procedures.
+- Introduction to student services, facilities, and support systems.
+- Information on University rules, regulations, Student By-Laws, and procedures.
+- Guidance on transitioning to university academic and social life.
+- Introduction to DARUSO, student associations, and campus life.
+
+All new students are required to attend the orientation programme. Students are registered only after they have paid the required fees.
+
+=== POSTPONEMENT AND DEFERRAL OF STUDIES ===
+Students may not postpone studies after the effective commencement of an academic year except under special circumstances. Permission is granted upon producing satisfactory evidence and written approval from the sponsor.
+
+Special circumstances that may qualify:
+- Sickness (must submit an authentic medical report from a recognized hospital)
+- Serious social problems (each case is considered on its own merit)
+- Severe sponsorship problem
+
+Maximum absence allowed: Students may be away for a maximum of 2 years and still be re-admitted into the same year of studies where they left off.
+
+Students discontinued due to examination irregularities may re-apply after 3 years away, and must compete with other applicants for re-admission into first year.
+
+Students who postpone examinations are assigned a "PEX" (Postponed Exam) grade. Students who have not completed coursework for acceptable reasons receive an "I" (Incomplete) grade. Both must be cleared during the special examinations for that academic year.
+
+A student may postpone a maximum of 3 examinations per academic year, except with DVC-Academic approval for special circumstances.
+
+Contact: Directorate of Students Services or your College/School Dean for postponement applications.
+
+=== STUDENT CONDUCT AND DISCIPLINE ===
+Student conduct at UDSM is governed by the Student By-Laws (Revised 2021), the UDSM Anti-Sexual Harassment Policy (revised 2023), and the UDSM Gender Policy (2021).
+
+DARUSO also operates under its own constitution for student governance accountability.
+
+Key conduct expectations:
+- Students must comply with all University laws, rules and regulations.
+- Students must respect fellow students, staff, and the broader University community.
+- No acts of Gender-Based Violence (GBV), Sexual Exploitation and Abuse (SEA), or sexual harassment will be tolerated.
+- Disciplinary cases are handled by the Students Disciplinary Committee, administered by DSTS (Dean of Students serves as Secretary).
+- Drug abuse, betting, excessive alcohol, bullying, rape, and related misconduct are subject to disciplinary action.
+
+GBV and SEA: Awareness is promoted through peer educators. Survivors can access medical care, legal assistance, and counselling.
+
+All students who submit forged certificates or false information during admission will face de-registration and legal action.
+
+Contact for disciplinary issues: Dean of Students, Directorate of Students Services, doso@udsm.ac.tz.
+
+=== STUDENT GRIEVANCES AND APPEALS ===
+Students may raise grievances related to academic life or psychosocial wellbeing with University management. The University is committed to handling grievances in a fair, transparent and timely manner.
+
+Grievance process: Submit grievances to the Directorate of Students Services (DSTS) or to the Dean of Students. The Dean listens, investigates, and provides timely feedback.
+
+Academic appeals (examination results): Applications for appeals must be submitted within a specific window after results are released:
+- First sitting results appeals: 25 – 28 September 2026 (except MCHAS)
+- MCHAS: 8 – 15 October 2026
+
+Key appeal dates (Main Campus):
+- Department Boards (Appeals): Monday 29 September 2026
+- Special College/School/Institute Boards (Appeals): Thursday 1 October 2026
+- Senate Undergraduate Studies Committee (Appeals): Tuesday 6 October 2026
+- Senate (Appeals and Examination Irregularities): Tuesday 13 October 2026
+
+Students must use the official irregularity form (UDSM-EI-01) for examination irregularity cases. All appeals and irregularity cases must be routed through the respective Department, School or College.
+
+=== STUDENTS WITH SPECIAL NEEDS ===
+The University of Dar es Salaam is committed to inclusivity and non-discrimination for students with disabilities and special educational needs.
+
+Centre for Disability Services (CDS): Established November 2022. Located at the Mwalimu Julius K. Nyerere Mlimani Campus.
+
+Support available:
+- Special mobility aids: 5 tricycles with drivers for campus movement.
+- Specialised housing with accessibility features.
+- Special aided equipment for teaching and learning.
+- Academic support through the Disability and Special Educational Needs Policy (March 2022).
+- Anti-discrimination provisions in all service delivery.
+
+Accommodation priority: Special needs students are prioritised in accommodation allocation.
+
+UDSM has been enrolling students with visual impairment since 1978. Enrolment has grown significantly and the University continues to expand support services.
+
+For support: Contact the Centre for Disability Services (CDS) or the Directorate of Students Services.
+
+=== INTERNATIONAL STUDENTS ===
+UDSM welcomes students from across the world. The Directorate of Internationalisation, Convocation and Advancement (DICA) manages international student affairs under the UDSM Internationalisation Policy (2022).
+
+Fees: International students pay significantly higher tuition fees (approximately 5 to 14 times the Tanzanian fee). Refer to the TUITION FEES section for details.
+
+Accommodation: Improved and expanded accommodation facilities are available for international students.
+
+Student visa: International students must obtain the appropriate student visa/residence permit. Contact the DICA office or your relevant college/school for guidance.
+
+An international student is defined as any student studying at UDSM (online or face-to-face) who is not a Tanzanian citizen and does not have permanent residency.
+
+Applicants from 8-4-4 education systems (e.g., Kenya, Uganda) must complete at least one year of university in their home country before applying to UDSM undergraduate programmes.
+
+Contact: Directorate of Internationalisation, Convocation and Advancement (DICA), University of Dar es Salaam.
+
+=== SPIRITUAL AFFAIRS AND WORSHIP ===
+UDSM promotes religious tolerance and inter-faith dialogue. All students and staff have complete freedom of worship based on their spiritual beliefs, within the limitations of the laws of Tanzania and the Student By-Laws.
+
+Facilities available on the Mwalimu Julius K. Nyerere Mlimani Campus:
+- Mosque: for Muslim students and staff.
+- Joint Christian Chapel: for Christian worship services.
+- Spiritual counselling services: provided by spiritual leaders and counsellors coordinated by DSTS.
+
+The Directorate of Students Services (DSTS) is responsible for managing spiritual affairs at UDSM. The University facilitates coordination of spiritual activities to ensure they do not disrupt academic activities.
+
+Students are encouraged to engage with their respective faith communities and can seek spiritual counselling through DSTS.
+
+=== CAREER GUIDANCE AND ENTREPRENEURSHIP ===
+Career guidance services are provided by the Directorate of Students Services (DSTS), academic departments, and the UDSM Counselling Unit.
+
+Services available:
+- Career counselling sessions and mentorship programmes.
+- Career days and job fairs with prospective employers.
+- Soft skills training: communication, teamwork, collaboration, time management, adaptability, and critical thinking.
+- Partnerships with industry for internships, field placements, and practical experience.
+- Alumni engagement and employer connections for graduate job placement.
+- Entrepreneurship training through the Directorate of Innovation and Entrepreneurship (DIEN).
+
+Entrepreneurship: DIEN offers innovation, creativity, and entrepreneurship training. The Directorate aims to produce graduates who are job creators, not just job seekers. Students are encouraged to participate in DIEN activities.
+
+Part-time employment: Postgraduate students may take part-time jobs as per UDSM General Regulations (2018). Undergraduate students are also encouraged to engage in entrepreneurship, peer tutoring, technical support, and other activities.
+
+Contact: DSTS or the Counselling Unit for career guidance appointments. DIEN email: udiec@udsm.ac.tz, Tel: +255 22 2410115 Ext. 2087.
