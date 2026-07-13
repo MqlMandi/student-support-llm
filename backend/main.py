@@ -19,8 +19,13 @@ from datetime import datetime
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from contextlib import asynccontextmanager
+import asyncio
 
+# Add both the backend directory and the project root to sys.path
+# This ensures that `from backend.x import y` works regardless of where uvicorn is started.
 sys.path.insert(0, os.path.dirname(__file__))
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from llm_client import ask_llm_with_rag, find_relevant_faq
 from config import APP_NAME, APP_VERSION, LOG_FILE
@@ -42,10 +47,21 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # ── FastAPI App ────────────────────────────────────────────────────────────────
+from backend.tasks.cleanup import cleanup_stale_sessions
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup: spawn background cleanup task
+    task = asyncio.create_task(cleanup_stale_sessions())
+    yield
+    # Shutdown: cancel task
+    task.cancel()
+
 app = FastAPI(
     title=APP_NAME,
     description="Self-hosted LLM student support assistant with FAQ-based RAG.",
     version=APP_VERSION,
+    lifespan=lifespan
 )
 
 app.add_middleware(

@@ -12,8 +12,9 @@ def create_session_collection(text: str) -> str:
     session_id = str(uuid.uuid4())
     collection_name = f"temp_{session_id}"
     
+    import time
     client = get_chroma_client()
-    collection = client.create_collection(name=collection_name)
+    collection = client.create_collection(name=collection_name, metadata={"created_at": time.time()})
     
     chunks = chunk_text(text)
     

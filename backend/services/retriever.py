@@ -5,7 +5,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def retrieve_context(question: str, session_id: Optional[str] = None, k: int = 3) -> tuple[str, List[str]]:
+def retrieve_context(question: str, session_id: Optional[str] = None, k: int = 5) -> tuple[str, List[str]]:
     """
     Retrieves the top_k most relevant chunks from ChromaDB.
     Queries the session collection if session_id is provided,
