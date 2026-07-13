@@ -26,3 +26,4 @@ langchain
 PyMuPDF
 python-docx
 python-multipart
+langchain-text-splitters
