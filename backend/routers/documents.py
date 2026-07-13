@@ -22,3 +22,14 @@ async def upload_temp_document(file: UploadFile = File(...)):
     except Exception as e:
         logger.error(f"Error processing uploaded file: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@router.delete("/api/session/{session_id}")
+def end_session(session_id: str):
+    try:
+        from backend.services.session_manager import delete_session_collection
+        delete_session_collection(session_id)
+        logger.info(f"Deleted temporary session {session_id}")
+        return {"status": "success", "message": f"Session {session_id} deleted."}
+    except Exception as e:
+        logger.error(f"Error deleting session {session_id}: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))

@@ -39,3 +39,15 @@ def create_session_collection(text: str) -> str:
         )
         
     return session_id
+
+def delete_session_collection(session_id: str):
+    """
+    Deletes the temporary ChromaDB collection associated with the session_id.
+    """
+    client = get_chroma_client()
+    collection_name = f"temp_{session_id}"
+    try:
+        client.delete_collection(name=collection_name)
+    except Exception:
+        # Collection might not exist, which is fine
+        pass
