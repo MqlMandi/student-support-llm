@@ -56,6 +56,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from routers import documents
+app.include_router(documents.router)
 
 # ── Data models ────────────────────────────────────────────────────────────────
 
