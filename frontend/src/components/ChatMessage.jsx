@@ -14,6 +14,8 @@
 //
 // Styles live in App.css.
 
+import { FileText } from "lucide-react";
+
 export default function ChatMessage({ msg }) {
   const isUser = msg.role === "user";
 
@@ -26,6 +28,12 @@ export default function ChatMessage({ msg }) {
       )}
 
       <div className={`msg-bubble ${isUser ? "msg-bubble--user" : "msg-bubble--assistant"}`}>
+        {msg.attachedFile && (
+          <div className="msg-file-badge">
+            <FileText size={14} />
+            <span>{msg.attachedFile}</span>
+          </div>
+        )}
         <p className="msg-text">{msg.text}</p>
         {msg.time && (
           <time className="msg-time">{msg.time}</time>

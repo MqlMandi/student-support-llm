@@ -458,6 +458,27 @@ button {
   box-shadow: var(--shadow);
 }
 
+.msg-file-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.msg-file-badge span {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .msg-text {
   color: inherit;
   font-size: 16px;
@@ -776,4 +797,72 @@ button {
   .submit-btn {
     transition: none;
   }
+}
+
+/* File Upload Styles */
+.attach-btn {
+  width: 31px;
+  height: 31px;
+  flex: 0 0 31px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-stone);
+  font-size: 16px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.attach-btn:hover:not(:disabled) {
+  color: var(--color-charcoal);
+  background: var(--color-subtle-fill);
+}
+
+.attach-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.file-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  margin-bottom: -4px;
+  padding: 6px 10px;
+  background: var(--color-subtle-fill);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-pebble);
+  font-size: 13px;
+  color: var(--color-charcoal);
+  animation: slide-in 0.15s ease both;
+}
+
+.file-badge__name {
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-badge__remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 16px;
+  color: var(--color-ash-gray);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.file-badge__remove:hover {
+  background: #e4e0d8;
+  color: var(--color-charcoal);
+}
+
+.spin {
+  animation: spin 1s linear infinite;
 }

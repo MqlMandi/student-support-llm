@@ -1,12 +1,12 @@
 import requests
 from typing import List
+from backend.config import OLLAMA_BASE_URL, EMBEDDING_MODEL_NAME
 
-OLLAMA_API_URL = "http://localhost:11434/api/embeddings"
-MODEL_NAME = "nomic-embed-text:latest"
+OLLAMA_API_URL = f"{OLLAMA_BASE_URL}/api/embeddings"
 
 def generate_embedding(text: str) -> List[float]:
     payload = {
-        "model": MODEL_NAME,
+        "model": EMBEDDING_MODEL_NAME,
         "prompt": text
     }
     response = requests.post(OLLAMA_API_URL, json=payload)

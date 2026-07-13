@@ -8,6 +8,7 @@ import "./App.css";
 import WelcomeScreen from "./components/WelcomeScreen";
 import ChatMessage from "./components/ChatMessage";
 import TypingIndicator from "./components/TypingIndicator";
+import { FileText, X, Loader2, Paperclip, RefreshCw, Globe, GraduationCap, Camera } from "lucide-react";
 
 const API_URL = "http://localhost:8000";
 
@@ -20,9 +21,15 @@ export default function App() {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading]   = useState(false);
   const [error, setError]       = useState(null);
+  
+  // File upload state
+  const [sessionId, setSessionId] = useState(null);
+  const [uploadedFilename, setUploadedFilename] = useState(null);
+  const [uploadingFile, setUploadingFile] = useState(false);
 
   const bottomRef = useRef(null);
   const inputRef  = useRef(null);
+  const fileInputRef = useRef(null);
   const hasMessages = messages.length > 0;
 
   useEffect(() => {
@@ -36,6 +43,47 @@ export default function App() {
     el.style.height = Math.min(el.scrollHeight, 160) + "px";
   }, [input]);
 
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploadingFile(true);
+    setError(null);
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const res = await axios.post(`${API_URL}/api/upload`, formData);
+      setSessionId(res.data.session_id);
+      setUploadedFilename(res.data.filename);
+    } catch (err) {
+      setError(err.response?.data?.detail || "Failed to upload file.");
+    } finally {
+      setUploadingFile(false);
+      e.target.value = null; // reset input
+    }
+  };
+
+  const handleRemoveFile = async () => {
+    if (sessionId) {
+      try {
+        await axios.delete(`${API_URL}/api/session/${sessionId}`);
+      } catch (err) {
+        console.error("Failed to delete session", err);
+      }
+    }
+    setSessionId(null);
+    setUploadedFilename(null);
+  };
+
+  const startNewChat = async () => {
+    await handleRemoveFile();
+    setMessages([]);
+    setError(null);
+    setInput("");
+  };
+
   const send = useCallback(async (text) => {
     const q = (text ?? input).trim();
     if (!q || loading) return;
@@ -43,10 +91,18 @@ export default function App() {
     setError(null);
     setLoading(true);
     setInput("");
-    setMessages((prev) => [...prev, { role: "user", text: q, time: getTime() }]);
+    
+    // Snapshot the file to the chat log and consume it from the composer UI
+    const currentFile = uploadedFilename;
+    setUploadedFilename(null);
+    
+    setMessages((prev) => [...prev, { role: "user", text: q, time: getTime(), attachedFile: currentFile }]);
 
     try {
-      const res = await axios.post(`${API_URL}/ask`, { question: q });
+      const payload = { question: q };
+      if (sessionId) payload.session_id = sessionId;
+      
+      const res = await axios.post(`${API_URL}/ask`, payload);
       setMessages((prev) => [
         ...prev,
         { role: "assistant", text: res.data.answer, time: getTime() },
@@ -63,7 +119,7 @@ export default function App() {
       setLoading(false);
       inputRef.current?.focus();
     }
-  }, [input, loading]);
+  }, [input, loading, sessionId]);
 
   const onKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey && !loading) {
@@ -82,14 +138,40 @@ export default function App() {
 
   const composer = (
     <>
+      {uploadedFilename && (
+        <div className="file-badge">
+          <span className="file-badge__name" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <FileText size={14} /> {uploadedFilename}
+          </span>
+          <button className="file-badge__remove" onClick={handleRemoveFile} aria-label="Remove file">
+            <X size={14} />
+          </button>
+        </div>
+      )}
       <div className="input-card">
+        <input 
+          type="file" 
+          ref={fileInputRef} 
+          style={{ display: 'none' }} 
+          accept=".txt,.md,.pdf,.docx"
+          onChange={handleFileUpload}
+        />
+        <button 
+          className="attach-btn" 
+          onClick={() => fileInputRef.current?.click()}
+          disabled={uploadingFile || loading}
+          aria-label="Attach file"
+        >
+          {uploadingFile ? <Loader2 size={16} className="spin" /> : <Paperclip size={16} />}
+        </button>
+
         <textarea
           ref={inputRef}
           className="input-card__field"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={onKeyDown}
-          placeholder="Ask about courses, exams, fees, hostel..."
+          placeholder={uploadedFilename ? `Ask about ${uploadedFilename}...` : "Ask about courses, exams, fees, hostel..."}
           rows={1}
           disabled={loading}
           aria-label="Your question"
@@ -142,9 +224,9 @@ export default function App() {
             <button
               className="sidebar-nav__item sidebar-nav__item--active"
               type="button"
-              onClick={() => window.location.reload()}
+              onClick={startNewChat}
             >
-              <span aria-hidden="true">🔄</span>
+              <RefreshCw size={16} />
               <span>New Chat</span>
             </button>
 
@@ -153,7 +235,7 @@ export default function App() {
               type="button"
               onClick={() => window.location.href = "https://udsm.ac.tz/"}
             >
-              <span aria-hidden="true">🌐</span>
+              <Globe size={16} />
               <span>UDSM Website</span>
             </button>
             
@@ -162,7 +244,7 @@ export default function App() {
               type="button"
               onClick={() => window.location.href = "https://aris3.udsm.ac.tz/index.php?r=student%2Fuser%2Flogin"}
             >
-              <span aria-hidden="true">🧑‍🎓</span>
+              <GraduationCap size={16} />
               <span>ARIS 3</span>
             </button>
 
@@ -171,7 +253,7 @@ export default function App() {
               type="button"
               onClick={() => window.location.href = "https://www.instagram.com/udsmofficial?igsh=dGEzdWVwOHJ4bW1q"}
             >
-              <span aria-hidden="true">📸</span>
+              <Camera size={16} />
               <span>UDSM Socials</span>
             </button>
             
@@ -192,7 +274,7 @@ export default function App() {
           <div className="app-header__brand">
             <span className="app-header__title">Student Support</span>
             <span className="app-header__sep" aria-hidden="true" />
-            <span className="app-header__model">Llama 3.2 &middot; local</span>
+            <span className="app-header__model">Llama 3.1 &middot; local</span>
           </div>
           <span className="app-header__badge">UDSM</span>
         </header>
