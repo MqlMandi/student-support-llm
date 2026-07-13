@@ -61,8 +61,11 @@ app.include_router(documents.router)
 
 # ── Data models ────────────────────────────────────────────────────────────────
 
+from typing import Optional
+
 class AskRequest(BaseModel):
     question: str
+    session_id: Optional[str] = None
 
 class AskResponse(BaseModel):
     question:  str
@@ -111,28 +114,18 @@ def ask_question(request: AskRequest):
     logger.info(f"Question: {question}")
 
     try:
-        # Step 1 — retrieve the relevant FAQ sections for logging/response
-        # (ask_llm_with_rag also calls this internally, but we call it here
-        #  separately so we can log which sections were used)
-        from llm_client import find_relevant_faq, _load_faq
-        sections_used: list[str] = []
-        faq_sections = _load_faq(FAQ_PATH)
-
-        if faq_sections:
-            from llm_client import _score
-            scored = sorted(
-                [(name, _score(text, question)) for name, text in faq_sections.items()],
-                key=lambda x: x[1],
-                reverse=True,
-            )
-            sections_used = [name for name, score in scored[:2] if score >= 0.15]
-            if sections_used:
-                logger.info(f"FAQ sections retrieved: {sections_used}")
-            else:
-                logger.info("No FAQ sections met the relevance threshold — using model knowledge")
+        # Step 1 — retrieve context from ChromaDB
+        from backend.services.retriever import retrieve_context
+        from backend.llm_client import ask_llm_with_rag
+        
+        context, sections_used = retrieve_context(question, request.session_id)
+        if sections_used:
+            logger.info(f"Retrieved context from sources: {sections_used}")
+        else:
+            logger.info("No context met the relevance threshold — using model knowledge")
 
         # Step 2 — generate the answer
-        answer = ask_llm_with_rag(question, faq_path=FAQ_PATH)
+        answer = ask_llm_with_rag(question, context)
         timestamp = datetime.now().isoformat()
 
         logger.info(f"Answer generated ({len(answer)} chars)")

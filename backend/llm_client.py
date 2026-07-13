@@ -234,18 +234,15 @@ def ask_llm(question: str) -> str:
     return _call_ollama(prompt)
 
 
-def ask_llm_with_rag(question: str, faq_path: str = "faq.txt") -> str:
+def ask_llm_with_rag(question: str, context: str = "") -> str:
     """
-    Retrieve the most relevant FAQ sections for the question, inject them
-    into the prompt, and return the LLM's grounded answer.
+    Inject the retrieved context into the prompt, and return the LLM's grounded answer.
 
-    If no relevant FAQ sections are found, falls back to ask_llm().
+    If no context is found, falls back to ask_llm().
     Uses a longer timeout (120 s) because the augmented prompt is larger.
     """
-    context = find_relevant_faq(question, faq_path=faq_path)
-
     if not context:
-        # No relevant FAQ content found — use the model's general knowledge
+        # No relevant context found — use the model's general knowledge
         return ask_llm(question)
 
     prompt = (
