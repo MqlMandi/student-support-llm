@@ -14,10 +14,29 @@
 //
 // Styles live in App.css.
 
-import { FileText } from "lucide-react";
+import { useState } from "react";
+import axios from "axios";
+import { FileText, ThumbsUp, Minus, ThumbsDown } from "lucide-react";
+
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 export default function ChatMessage({ msg }) {
   const isUser = msg.role === "user";
+  const [rating, setRating] = useState(null);
+
+  const handleFeedback = async (value) => {
+    if (rating) return; // already rated
+    setRating(value);
+    try {
+      await axios.post(`${API_URL}/api/feedback`, {
+        question: msg.question || "Unknown question",
+        answer: msg.text,
+        rating: value
+      });
+    } catch (err) {
+      console.error("Failed to submit feedback", err);
+    }
+  };
 
   return (
     <div className={`msg-row ${isUser ? "msg-row--user" : "msg-row--assistant"}`}>
@@ -37,6 +56,21 @@ export default function ChatMessage({ msg }) {
         <p className="msg-text">{msg.text}</p>
         {msg.time && (
           <time className="msg-time">{msg.time}</time>
+        )}
+        
+        {/* Feedback UI */}
+        {!isUser && (
+          <div className="msg-feedback">
+            {rating ? (
+              <span className="feedback-thanks">Thank you for rating: {rating}</span>
+            ) : (
+              <div className="feedback-buttons">
+                <button onClick={() => handleFeedback("Good")} aria-label="Good" className="feedback-btn"><ThumbsUp size={14} /></button>
+                <button onClick={() => handleFeedback("Average")} aria-label="Average" className="feedback-btn"><Minus size={14} /></button>
+                <button onClick={() => handleFeedback("Poor")} aria-label="Poor" className="feedback-btn"><ThumbsDown size={14} /></button>
+              </div>
+            )}
+          </div>
         )}
       </div>
 

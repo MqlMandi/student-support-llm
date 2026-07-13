@@ -14,6 +14,7 @@
 import logging
 import sys
 import os
+import csv
 from datetime import datetime
 
 from fastapi import FastAPI, HTTPException
@@ -95,6 +96,11 @@ class HealthResponse(BaseModel):
     version:     str
     faq_loaded:  bool
 
+class FeedbackRequest(BaseModel):
+    question: str
+    answer: str
+    rating: str
+
 
 # ── Endpoints ──────────────────────────────────────────────────────────────────
 
@@ -109,6 +115,27 @@ def health_check():
         version=APP_VERSION,
         faq_loaded=faq_present,
     )
+
+@app.post("/api/feedback")
+def submit_feedback(request: FeedbackRequest):
+    """Save user feedback (Good/Average/Poor) to a CSV file."""
+    try:
+        feedback_file = os.path.join(os.path.dirname(__file__), "data", "feedback.csv")
+        os.makedirs(os.path.dirname(feedback_file), exist_ok=True)
+        
+        file_exists = os.path.isfile(feedback_file)
+        
+        with open(feedback_file, mode="a", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            if not file_exists:
+                writer.writerow(["Timestamp", "Question", "Answer", "Rating"])
+            writer.writerow([datetime.now().isoformat(), request.question, request.answer, request.rating])
+            
+        logger.info(f"Feedback received: {request.rating}")
+        return {"status": "success"}
+    except Exception as e:
+        logger.error(f"Failed to save feedback: {e}")
+        raise HTTPException(status_code=500, detail="Could not save feedback.")
 
 
 @app.post("/ask", response_model=AskResponse)

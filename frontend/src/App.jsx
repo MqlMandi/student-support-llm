@@ -10,7 +10,7 @@ import ChatMessage from "./components/ChatMessage";
 import TypingIndicator from "./components/TypingIndicator";
 import { FileText, X, Loader2, Paperclip, RefreshCw, Globe, GraduationCap, Camera } from "lucide-react";
 
-const API_URL = "http://localhost:8000";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 function getTime() {
   return new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
@@ -105,7 +105,7 @@ export default function App() {
       const res = await axios.post(`${API_URL}/ask`, payload);
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", text: res.data.answer, time: getTime() },
+        { role: "assistant", text: res.data.answer, time: getTime(), question: q },
       ]);
     } catch (err) {
       let msg = "Something went wrong. Please try again.";

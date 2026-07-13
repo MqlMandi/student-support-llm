@@ -866,3 +866,41 @@ button {
 .spin {
   animation: spin 1s linear infinite;
 }
+
+/* Feedback Styles */
+.msg-feedback {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--color-pebble);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.feedback-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.feedback-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  color: var(--color-ash-gray);
+  background: var(--color-subtle-fill);
+  transition: all 0.2s ease;
+}
+
+.feedback-btn:hover {
+  background: #e4e0d8;
+  color: var(--color-charcoal);
+  transform: translateY(-1px);
+}
+
+.feedback-thanks {
+  font-size: 12px;
+  color: var(--color-ash-gray);
+  font-style: italic;
+}
