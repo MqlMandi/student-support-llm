@@ -869,11 +869,10 @@ button {
 
 /* Feedback Styles */
 .msg-feedback {
-  margin-top: 8px;
-  padding-top: 8px;
-  border-top: 1px dashed var(--color-pebble);
+  margin-top: 2px;
+  margin-left: 4px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .feedback-buttons {
@@ -903,4 +902,65 @@ button {
   font-size: 12px;
   color: var(--color-ash-gray);
   font-style: italic;
+}
+
+/* Auth Styles */
+.auth-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-aged-paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.auth-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-pebble);
+  padding: 32px;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow);
+  width: min(90%, 400px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+}
+
+.auth-card h2 {
+  font-size: 20px;
+  color: var(--color-charcoal);
+  font-weight: 500;
+}
+
+.auth-card p {
+  font-size: 14px;
+  color: var(--color-ash-gray);
+}
+
+.auth-input {
+  padding: 12px;
+  border: 1px solid var(--color-pebble);
+  border-radius: var(--radius-input);
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.auth-input:focus {
+  border-color: var(--color-deep-teal);
+}
+
+.auth-btn {
+  background: var(--color-deep-teal);
+  color: #fff;
+  padding: 12px;
+  border-radius: var(--radius-input);
+  font-weight: 500;
+  transition: filter 0.2s;
+}
+
+.auth-btn:hover {
+  filter: brightness(1.1);
 }

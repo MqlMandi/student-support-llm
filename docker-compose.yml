@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      - GENERATION_MODEL_NAME=llama3.2:1b
+      - SECRET_ACCESS_CODE=udsm2026
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./backend/data:/app/backend/data
+      - ./backend/logs:/app/backend/logs
+      - ./chroma_db:/app/chroma_db
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=http://localhost:8000
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend

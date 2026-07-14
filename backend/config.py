@@ -10,3 +10,4 @@ EMBEDDING_MODEL_NAME = os.getenv("EMBEDDING_MODEL_NAME", "nomic-embed-text:lates
 LOG_FILE = os.getenv("LOG_FILE", "logs/app.log")
 APP_NAME = os.getenv("APP_NAME", "Student Support LLM Assistant")
 APP_VERSION = os.getenv("APP_VERSION", "1.0.0")
+SECRET_ACCESS_CODE = os.getenv("SECRET_ACCESS_CODE", "udsm2026")

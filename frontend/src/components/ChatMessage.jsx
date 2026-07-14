@@ -57,22 +57,22 @@ export default function ChatMessage({ msg }) {
         {msg.time && (
           <time className="msg-time">{msg.time}</time>
         )}
-        
-        {/* Feedback UI */}
-        {!isUser && (
-          <div className="msg-feedback">
-            {rating ? (
-              <span className="feedback-thanks">Thank you for rating: {rating}</span>
-            ) : (
-              <div className="feedback-buttons">
-                <button onClick={() => handleFeedback("Good")} aria-label="Good" className="feedback-btn"><ThumbsUp size={14} /></button>
-                <button onClick={() => handleFeedback("Average")} aria-label="Average" className="feedback-btn"><Minus size={14} /></button>
-                <button onClick={() => handleFeedback("Poor")} aria-label="Poor" className="feedback-btn"><ThumbsDown size={14} /></button>
-              </div>
-            )}
-          </div>
-        )}
       </div>
+
+      {/* Feedback UI */}
+      {!isUser && (
+        <div className="msg-feedback">
+          {rating ? (
+            <span className="feedback-thanks">Thank you for rating: {rating}</span>
+          ) : (
+            <div className="feedback-buttons">
+              <button onClick={() => handleFeedback("Good")} aria-label="Good" className="feedback-btn"><ThumbsUp size={14} /></button>
+              <button onClick={() => handleFeedback("Average")} aria-label="Average" className="feedback-btn"><Minus size={14} /></button>
+              <button onClick={() => handleFeedback("Poor")} aria-label="Poor" className="feedback-btn"><ThumbsDown size={14} /></button>
+            </div>
+          )}
+        </div>
+      )}
 
     </div>
   );

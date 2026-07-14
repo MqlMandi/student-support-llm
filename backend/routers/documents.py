@@ -1,14 +1,15 @@
 import os
 import tempfile
 import logging
-from fastapi import APIRouter, UploadFile, File, HTTPException
+from fastapi import APIRouter, UploadFile, File, HTTPException, Depends
+from backend.utils.auth import verify_token
 from backend.services.session_manager import create_session_collection
 from backend.utils.document_parser import parse_file
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
 
-@router.post("/api/upload")
+@router.post("/api/upload", dependencies=[Depends(verify_token)])
 async def upload_temp_document(file: UploadFile = File(...)):
     allowed_extensions = (".txt", ".md", ".pdf", ".docx")
     if not file.filename.lower().endswith(allowed_extensions):
@@ -38,7 +39,7 @@ async def upload_temp_document(file: UploadFile = File(...)):
         if temp_file_path and os.path.exists(temp_file_path):
             os.remove(temp_file_path)
 
-@router.delete("/api/session/{session_id}")
+@router.delete("/api/session/{session_id}", dependencies=[Depends(verify_token)])
 def end_session(session_id: str):
     try:
         from backend.services.session_manager import delete_session_collection

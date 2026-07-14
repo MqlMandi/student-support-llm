@@ -8,7 +8,7 @@ import "./App.css";
 import WelcomeScreen from "./components/WelcomeScreen";
 import ChatMessage from "./components/ChatMessage";
 import TypingIndicator from "./components/TypingIndicator";
-import { FileText, X, Loader2, Paperclip, RefreshCw, Globe, GraduationCap, Camera } from "lucide-react";
+import { FileText, X, Loader2, Paperclip, RefreshCw, Globe, GraduationCap, Camera, Eye, EyeOff } from "lucide-react";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
@@ -21,6 +21,35 @@ export default function App() {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading]   = useState(false);
   const [error, setError]       = useState(null);
+  
+  // Auth state
+  const [accessCode, setAccessCode] = useState(() => localStorage.getItem("accessCode") || "");
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("accessCode"));
+  const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      axios.defaults.headers.common["X-Access-Token"] = accessCode;
+    } else {
+      delete axios.defaults.headers.common["X-Access-Token"];
+    }
+  }, [isAuthenticated, accessCode]);
+
+  const authenticate = () => {
+    if (accessCode.trim()) {
+      localStorage.setItem("accessCode", accessCode);
+      setIsAuthenticated(true);
+      setError(null);
+    }
+  };
+
+  const logout = () => {
+    localStorage.removeItem("accessCode");
+    setIsAuthenticated(false);
+    setAccessCode("");
+    setMessages([]);
+    setError(null);
+  };
   
   // File upload state
   const [sessionId, setSessionId] = useState(null);
@@ -58,7 +87,12 @@ export default function App() {
       setSessionId(res.data.session_id);
       setUploadedFilename(res.data.filename);
     } catch (err) {
-      setError(err.response?.data?.detail || "Failed to upload file.");
+      if (err.response?.status === 401) {
+        setIsAuthenticated(false);
+        setError("Invalid Access Code.");
+      } else {
+        setError(err.response?.data?.detail || "Failed to upload file.");
+      }
     } finally {
       setUploadingFile(false);
       e.target.value = null; // reset input
@@ -109,7 +143,11 @@ export default function App() {
       ]);
     } catch (err) {
       let msg = "Something went wrong. Please try again.";
-      if (err.code === "ERR_NETWORK")        msg = "Cannot reach the server \u2014 make sure the backend is running.";
+      if (err.response?.status === 401) {
+        msg = "Invalid Access Code.";
+        setIsAuthenticated(false);
+      }
+      else if (err.code === "ERR_NETWORK")        msg = "Cannot reach the server \u2014 make sure the backend is running.";
       else if (err.response?.status === 503) msg = "The AI model is unavailable \u2014 make sure Ollama is running.";
       else if (err.response?.status === 504) msg = "The model timed out. Try a shorter question.";
       else if (err.response?.status === 400) msg = err.response.data.detail ?? "Invalid request.";
@@ -211,6 +249,39 @@ export default function App() {
     </>
   );
 
+  if (!isAuthenticated) {
+    return (
+      <div className="auth-overlay">
+        <div className="auth-card">
+          <div className="brand-mark" style={{ margin: "0 auto", width: 40, height: 40, fontSize: 20 }}>S</div>
+          <h2>Student Support</h2>
+          <p>Please enter your access code to continue.</p>
+          <div style={{ position: "relative", width: "100%", display: "flex" }}>
+            <input 
+              type={showPassword ? "text" : "password"}
+              className="auth-input"
+              style={{ width: "100%", paddingRight: "40px" }}
+              value={accessCode} 
+              onChange={e => setAccessCode(e.target.value)}
+              placeholder="Access Code (udsm2026)"
+              onKeyDown={e => e.key === 'Enter' && authenticate()}
+            />
+            <button 
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", color: "var(--color-ash-gray)" }}
+              aria-label="Toggle password visibility"
+            >
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
+          </div>
+          <button className="auth-btn" onClick={authenticate}>Continue</button>
+          {error && <p style={{ color: "#d32f2f", fontSize: 13, marginTop: 8 }}>{error}</p>}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="app-shell">
       <aside className="app-sidebar" aria-label="Navigation">
@@ -262,10 +333,9 @@ export default function App() {
           <span className="sidebar-empty">No recent threads</span>
         </div>
 
-        <button className="sidebar-signin" type="button">
+        <button className="sidebar-signin" type="button" onClick={logout}>
           <span className="signin-dot" aria-hidden="true" />
-          <span>Sign In</span>
-          <span aria-hidden="true">&gt;</span>
+          <span>Sign Out</span>
         </button>
       </aside>
 

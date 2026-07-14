@@ -29,7 +29,9 @@ sys.path.insert(0, os.path.dirname(__file__))
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from llm_client import ask_llm_with_rag, find_relevant_faq
-from config import APP_NAME, APP_VERSION, LOG_FILE
+from config import APP_NAME, APP_VERSION, LOG_FILE, SECRET_ACCESS_CODE
+from fastapi import Header, Depends
+from backend.utils.auth import verify_token
 
 # Path to the FAQ file — sits next to main.py in the backend/ folder
 FAQ_PATH = os.path.join(os.path.dirname(__file__), "faq.txt")
@@ -116,7 +118,7 @@ def health_check():
         faq_loaded=faq_present,
     )
 
-@app.post("/api/feedback")
+@app.post("/api/feedback", dependencies=[Depends(verify_token)])
 def submit_feedback(request: FeedbackRequest):
     """Save user feedback (Good/Average/Poor) to a CSV file."""
     try:
@@ -138,7 +140,7 @@ def submit_feedback(request: FeedbackRequest):
         raise HTTPException(status_code=500, detail="Could not save feedback.")
 
 
-@app.post("/ask", response_model=AskResponse)
+@app.post("/ask", response_model=AskResponse, dependencies=[Depends(verify_token)])
 def ask_question(request: AskRequest):
     """
     Receive a student question, retrieve relevant FAQ sections,
