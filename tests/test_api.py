@@ -5,6 +5,7 @@
 import httpx
 
 BASE_URL = "http://localhost:8000"
+HEADERS = {"X-Access-Token": "udsm2026"}
 
 def test_health_check():
     """Backend should return status: ok."""
@@ -19,7 +20,8 @@ def test_ask_valid_question():
     response = httpx.post(
         f"{BASE_URL}/ask",
         json={"question": "How do I register for a course?"},
-        timeout=90.0          # LLM responses can take a while
+        headers=HEADERS,
+        timeout=300.0         # 1st query can take a long time to load model into RAM
     )
     assert response.status_code == 200, f"Expected 200, got {response.status_code}"
     data = response.json()
@@ -35,6 +37,7 @@ def test_ask_empty_question():
     response = httpx.post(
         f"{BASE_URL}/ask",
         json={"question": ""},
+        headers=HEADERS,
         timeout=10.0
     )
     assert response.status_code == 400, f"Expected 400, got {response.status_code}"
@@ -45,6 +48,7 @@ def test_ask_whitespace_question():
     response = httpx.post(
         f"{BASE_URL}/ask",
         json={"question": "   "},
+        headers=HEADERS,
         timeout=10.0
     )
     assert response.status_code == 400, f"Expected 400, got {response.status_code}"
@@ -55,13 +59,40 @@ def test_ask_library_question():
     response = httpx.post(
         f"{BASE_URL}/ask",
         json={"question": "What are the library opening hours?"},
-        timeout=90.0
+        headers=HEADERS,
+        timeout=120.0
     )
     assert response.status_code == 200, f"Expected 200, got {response.status_code}"
     data = response.json()
     assert len(data["answer"]) > 0
     print(f"Test 5 PASSED: Library question answered")
     print(f"   Preview: {data['answer'][:80]}...")
+
+def test_unauthorized_access():
+    """Missing X-Access-Token should return 401 Unauthorized."""
+    response = httpx.post(
+        f"{BASE_URL}/ask",
+        json={"question": "Should not work"},
+        timeout=10.0
+        # Notice: No HEADERS passed
+    )
+    assert response.status_code == 401, f"Expected 401, got {response.status_code}"
+    print("Test 6 PASSED: Security Token properly enforced")
+
+def test_submit_feedback():
+    """Feedback endpoint should accept Good/Average/Poor ratings."""
+    response = httpx.post(
+        f"{BASE_URL}/api/feedback",
+        json={
+            "question": "test question",
+            "answer": "test answer",
+            "rating": "Good"
+        },
+        headers=HEADERS,
+        timeout=10.0
+    )
+    assert response.status_code == 200, f"Expected 200, got {response.status_code}"
+    print("Test 7 PASSED: Feedback endpoint working correctly")
 
 if __name__ == "__main__":
     print("=" * 50)
@@ -75,6 +106,8 @@ if __name__ == "__main__":
         test_ask_empty_question,
         test_ask_whitespace_question,
         test_ask_library_question,
+        test_unauthorized_access,
+        test_submit_feedback,
     ]
 
     passed = 0
