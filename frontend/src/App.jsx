@@ -269,7 +269,7 @@ export default function App() {
             <button 
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", color: "var(--color-ash-gray)" }}
+              style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", color: "#72706b", zIndex: 10, background: "transparent", border: "none", cursor: "pointer", display: "flex", padding: 0 }}
               aria-label="Toggle password visibility"
             >
               {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
